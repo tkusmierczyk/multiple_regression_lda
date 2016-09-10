@@ -1,0 +1,28 @@
+model {
+
+  for (k in 1 : Ktopics ) {
+    worddist[k,1:Nwords] ~ ddirch(alphaWords)
+  }
+
+  for(d in 1 : Ndocs) {
+    topicdist[d,1:Ktopics] ~ ddirch(alphaTopics)
+    for (w in 1 : length[d]) {
+      wordtopic[d,w] ~ dcat(topicdist[d,1:Ktopics])
+      word[d,w] ~ dcat(worddist[wordtopic[d,w],1:Nwords])
+    }
+    for (o in 1 : Nouts) {
+     mu[d,o] <- inprod(weight[o, ], topicdist[d, ]) + intercept[o]
+     out[d,o] ~ dnorm(mu[d,o], tau[o])
+    }
+  }
+
+  for (o in 1: Nouts) {
+    sd[o] ~ dunif(0, 100)
+    tau[o] <- 1/(sd[o]*sd[o])  
+    intercept[o] ~ dnorm(0, 0.0001)
+    for (k in 1: Ktopics) {
+        weight[o,k] ~ dnorm(0, 0.0001)
+    }
+  }
+
+}

@@ -1,0 +1,9 @@
+model {
+  for( d in 1 : Ndocs ) {
+    topicdist[d,1:Ktopics] ~ ddirch(alphaTopics)
+    for (w in 1 : length[d]) {
+      wordtopic[d,w] ~ dcat(topicdist[d,1:Ktopics])
+      word[d,w] ~ dcat(worddist[wordtopic[d,w],1:Nwords])
+    }
+  }
+}
