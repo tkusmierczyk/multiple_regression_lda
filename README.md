@@ -1,19 +1,11 @@
-# multiple_regression_lda
-Code (Multiple Regression LDA) and data described in the paper:
+
+Code and data described in the paper:
 **T. Kusmierczyk, K. Nørvåg: Online Food Recipe Title Semantics: Combining Nutrient Facts and Topics. CIKM 2016.**
 
 ## Model  
-We propose a model
-that uses the latent topic space to explain both observed words and
-related real values.
-Among latent topic models, the most popular is latent dirichlet
-allocation (LDA). 
-We adopt LDA by extending it with multiple linear
-regression components.
-Linear regression is a well established statistical technique where
-dependent variables are modeled as a weighted sum of explanatory
-variables and bias.
-In our model explanatory variables are LDA topic distributions per document.
+The model applies the latent topics space to explain both observed textual documents and associated numeric values.
+Specifically, we adopt LDA by extending it with multivariate linear regression component. where
+dependent variables are modeled as a weighted sum of LDA topics per document and bias.
 
 ## Application
 Dietary pattern analysis is an important research area, and recently
